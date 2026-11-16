@@ -43,7 +43,6 @@ This page used to live at `/pawfection` on [perth-paw-ping](https://github.com/t
 <p align="center">
   <img src="docs/screenshots/desktop.jpg" alt="Pawfection home page" width="560">
   <img src="docs/screenshots/mobile.jpg" alt="Pawfection on a phone" width="260">
-  <img src="docs/screenshots/pawfection.jpg" alt="Services section" width="560">
 </p>
 
 _Captured from the live site (https://perth-pawfection.vercel.app). Regenerate with any headless browser; files live in `docs/screenshots/`._
