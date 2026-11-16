@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Pawfection — Dog Services Fremantle</title>
+    <meta name="description"
+        content="Calm, reliable dog care in Fremantle from George Andrew — hosting, sitting, daycare, house visits, walks, grooming and training.">
+    <meta name="theme-color" content="#ea580c">
+    <meta property="og:title" content="Pawfection — Dog Services Fremantle">
+    <meta property="og:description" content="Calm, reliable dog care in Fremantle from George Andrew.">
+    <meta property="og:image" content="https://perth-pawfection.vercel.app/images/og-pawfection.jpg">
+    <meta property="og:url" content="https://perth-pawfection.vercel.app">
+    <link rel="canonical" href="https://perth-pawfection.vercel.app">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/png" href="images/favicon-64.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <script>/* paint the intro curtain before first frame — see assets/motion.css */!function(d){d.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&(!sessionStorage.getItem('pp-seen')||sessionStorage.getItem('pp-nav')))d.classList.add('pp-cover')}catch(e){}}(document.documentElement)</script>
+
+    <!-- Tailwind (CDN build — see README "Next steps") -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&family=Poppins:ital,wght@0,500;0,700;0,800;1,700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #f97316;
+            --primary-hover: #ea580c;
+            --bg-accent: #fffbeb;
+
+            /* Shared motion layer colours */
+            --pp-accent: #f97316;
+            --pp-ink: #7c2d12;
+            --pp-paper: #fffbeb;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        .font-display {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(2deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(-1deg);
+            }
+        }
+
+        .float-anim {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Wagging tail on the logo paw */
+        @keyframes wag {
+
+            0%,
+            100% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(-18deg);
+            }
+
+            75% {
+                transform: rotate(18deg);
+            }
+        }
+
+        .logo:hover .logo-paw {
+            animation: wag 0.5s ease 2;
+        }
+
+        /* Lazy spin for the big paw in the contact block */
+        @keyframes spin-slow {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spin-slow {
+            animation: spin-slow 40s linear infinite;
+        }
+
+        /* Hover glow for cards */
+        .hover-glow {
+            transition: box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+
+        .hover-glow:hover {
+            box-shadow: 0 24px 50px -18px rgba(249, 115, 22, 0.45);
+            border-color: #fed7aa;
+        }
+
+        /* Service icon wiggles when its card is hovered */
+        @keyframes icon-wiggle {
+
+            0%,
+            100% {
+                rotate: 0deg;
+            }
+
+            25% {
+                rotate: -14deg;
+            }
+
+            75% {
+                rotate: 12deg;
+            }
+        }
+
+        .group:hover .svc-icon {
+            display: inline-block;
+            animation: icon-wiggle 0.5s ease;
+        }
+
+        /* Mobile menu */
+        #mobileMenu {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        #mobileMenu.open {
+            grid-template-rows: 1fr;
+        }
+
+        #mobileMenu>div {
+            overflow: hidden;
+        }
+
+        /* Underline that draws in on nav hover */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -4px;
+            height: 3px;
+            border-radius: 3px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+    </style>
+    <link rel="stylesheet" href="assets/motion.css">
+    <script src="assets/motion.js" defer></script>
+</head>
+
+<body class="bg-amber-50 text-slate-800">
+
+    <!-- Inline paw symbol, reused via <use href="#paw"> -->
+    <svg width="0" height="0" class="absolute" aria-hidden="true">
+        <symbol id="paw" viewBox="0 0 24 24">
+            <path fill="currentColor"
+                d="M12 15.5c-2.2 0-4 1.3-4 3s1.8 3 4 3 4-1.3 4-3-1.8-3-4-3zm-4.5-3a2 2 0 100-4 2 2 0 000 4zm3-4.5a2 2 0 100-4 2 2 0 000 4zm6 4.5a2 2 0 100-4 2 2 0 000 4zm-3-4.5a2 2 0 100-4 2 2 0 000 4z" />
+        </symbol>
+    </svg>
+
+    <!-- ============================================================
+         NAV — sticky glass header. Desktop links + mobile drop-down.
+         ============================================================ -->
+    <header class="fixed w-full bg-white/80 backdrop-blur shadow-sm z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center p-4">
+
+            <a href="#" class="logo text-2xl font-bold text-orange-600 flex items-center gap-2 font-display">
+                <svg class="logo-paw w-7 h-7 origin-bottom">
+                    <use href="#paw" />
+                </svg>
+                Pawfection
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 font-semibold text-slate-600" aria-label="Main">
+                <a href="#services" class="nav-link hover:text-orange-600 transition-colors">Services</a>
+                <a href="#products" class="nav-link hover:text-orange-600 transition-colors">Shop</a>
+                <a href="#about" class="nav-link hover:text-orange-600 transition-colors">Meet George</a>
+                <a href="https://perth-paw-ping.vercel.app" class="flex items-center gap-1.5 font-bold hover:scale-105 transition-transform"
+                    style="color: #FF6B4A;">
+                    <i class="bi bi-geo-fill"></i>
+                    PawPing
+                </a>
+                <a href="#contact" data-magnetic data-boop
+                    class="bg-orange-500 text-white px-5 py-2 rounded-xl text-sm hover:bg-orange-600 shadow-md shadow-orange-200">Book
+                    now</a>
+            </nav>
+
+            <button id="menuBtn" class="md:hidden text-slate-800 w-10 h-10 grid place-items-center"
+                aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+                <i class="bi bi-list text-2xl"></i>
+            </button>
+        </div>
+
+        <div id="mobileMenu" class="md:hidden bg-white">
+            <div>
+                <nav class="flex flex-col px-6 pb-4 font-semibold text-slate-700" aria-label="Mobile">
+                    <a href="#services" class="py-3 border-b border-slate-100">Services</a>
+                    <a href="#products" class="py-3 border-b border-slate-100">Shop</a>
+                    <a href="#about" class="py-3 border-b border-slate-100">Meet George</a>
+                    <a href="https://perth-paw-ping.vercel.app" class="py-3 border-b border-slate-100" style="color:#FF6B4A">PawPing tags</a>
+                    <a href="#contact" class="mt-3 bg-orange-500 text-white text-center py-3 rounded-xl">Book now</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- ============================================================
+             HERO — headline words bounce in; photo floats + parallaxes.
+             ============================================================ -->
+        <section class="pt-32 pb-24 bg-gradient-to-br from-orange-100 to-amber-50 relative overflow-hidden">
+            <!-- background paw prints walking across -->
+            <svg class="absolute w-16 h-16 text-orange-200 top-28 left-[6%] -rotate-12" aria-hidden="true"
+                data-parallax="-0.2">
+                <use href="#paw" />
+            </svg>
+            <svg class="absolute w-10 h-10 text-amber-200 bottom-16 left-[45%] rotate-12" aria-hidden="true"
+                data-parallax="0.25">
+                <use href="#paw" />
+            </svg>
+
+            <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center p-6 relative">
+
+                <div>
+                    <span data-reveal="pop"
+                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white text-orange-700 font-bold text-sm mb-6 shadow-sm">
+                        <span class="relative flex w-2.5 h-2.5">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full w-2.5 h-2.5 bg-orange-500"></span>
+                        </span>
+                        Fremantle's favourite sitter
+                    </span>
+                    <h1 data-split class="text-5xl md:text-6xl font-extrabold mb-6 leading-[1.08] text-slate-900">
+                        Premium care for your dog, <span class="text-orange-500 italic">with heart.</span>
+                    </h1>
+
+                    <p data-reveal="up" style="--pp-delay: .35s"
+                        class="mb-8 text-xl text-slate-600 max-w-lg leading-relaxed">
+                        Run by retired Claremont local <strong class="text-slate-800">George Andrew</strong>,
+                        Pawfection is a proud affiliate of <strong class="text-slate-800">PawPing</strong>. We deliver
+                        calm, reliable dog services tailored to your best friend's needs.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4" data-reveal="up" style="--pp-delay: .5s">
+                        <a href="#contact" data-magnetic data-boop
+                            class="bg-orange-500 text-white px-8 py-4 rounded-2xl shadow-lg shadow-orange-200 font-bold hover:bg-orange-600 inline-flex items-center gap-2">
+                            Book a visit
+                            <i class="bi bi-calendar-heart"></i>
+                        </a>
+                        <a href="#services" data-magnetic
+                            class="bg-white text-slate-800 border-2 border-slate-100 px-8 py-4 rounded-2xl font-bold hover:border-orange-200">
+                            See services
+                        </a>
+                    </div>
+                </div>
+
+                <div class="relative" data-reveal="zoom" style="--pp-delay: .2s">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-amber-200 rounded-full blur-3xl opacity-60">
+                    </div>
+                    <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-orange-200 rounded-full blur-3xl opacity-60">
+                    </div>
+                    <div class="float-anim">
+                        <div class="relative bg-white rounded-[2.5rem] shadow-2xl p-4">
+                            <img src="images/pawfection-hero00001.webp" width="1400" height="914"
+                                alt="George Andrew crouching to greet a German Shepherd in a park"
+                                class="rounded-[2rem] w-full h-[450px] object-cover" fetchpriority="high">
+                        </div>
+                    </div>
+                    <!-- floating review chip -->
+                    <div data-reveal="pop" style="--pp-delay: .9s" data-parallax="0.12"
+                        class="absolute -bottom-6 -left-4 md:-left-10 bg-white rounded-2xl shadow-xl px-5 py-4 flex items-center gap-3">
+                        <div class="w-11 h-11 rounded-full bg-orange-100 grid place-items-center text-orange-600">
+                            <svg class="w-6 h-6">
+                                <use href="#paw" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-display font-bold text-slate-900 leading-tight">Cared for by George</p>
+                            <p class="text-sm text-slate-500">Retired Claremont local</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================================
+             SERVICE MARQUEE — tilted orange band, loops forever.
+             ============================================================ -->
+        <div class="overflow-hidden py-4 -mt-6 relative z-10" aria-label="Services at a glance">
+            <div class="pp-marquee bg-orange-500 py-4 -rotate-1 -mx-4 shadow-lg shadow-orange-200" data-speed="34">
+                <div class="pp-marquee-track">
+                    <span class="flex items-center text-white font-display font-bold text-2xl whitespace-nowrap">Pet
+                        hosting<svg class="w-6 h-6 mx-8 text-orange-900/60">
+                            <use href="#paw" />
+                        </svg></span>
+                    <span class="flex items-center text-white font-display font-bold text-2xl whitespace-nowrap">Pet
+                        sitting<svg class="w-6 h-6 mx-8 text-orange-900/60">
+                            <use href="#paw" />
+                        </svg></span>
+                    <span class="flex items-center text-white font-display font-bold text-2xl whitespace-nowrap">Daycare<svg
+                            class="w-6 h-6 mx-8 text-orange-900/60">
+                            <use href="#paw" />
+                        </svg></span>
+                    <span class="flex items-center text-white font-display font-bold text-2xl whitespace-nowrap">House
+                        visits<svg class="w-6 h-6 mx-8 text-orange-900/60">
+                            <use href="#paw" />
+                        </svg></span>
+                    <span class="flex items-center text-white font-display font-bold text-2xl whitespace-nowrap">Coastal
+                        walks<svg class="w-6 h-6 mx-8 text-orange-900/60">
+                            <use href="#paw" />
+                        </svg></span>
+                    <span class="flex items-center text-white font-display font-bold text-2xl whitespace-nowrap">Grooming<svg
+                            class="w-6 h-6 mx-8 text-orange-900/60">
+                            <use href="#paw" />
+                        </svg></span>
+                    <span class="flex items-center text-white font-display font-bold text-2xl whitespace-nowrap">Training<svg
+                            class="w-6 h-6 mx-8 text-orange-900/60">
+                            <use href="#paw" />
+                        </svg></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================
+             SERVICES — cards pop in one after another and tilt on hover.
+             ============================================================ -->
+        <section id="services" class="py-24">
+            <div class="max-w-6xl mx-auto p-6">
+
+                <div class="text-center mb-16">
+                    <h2 data-split class="text-4xl md:text-5xl font-extrabold mb-4">Our services</h2>
+                    <p data-reveal="up" class="text-slate-600 max-w-2xl mx-auto text-lg">From overnight stays to
+                        daily enrichment, we provide everything your dog needs to feel at home and happy.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6" data-stagger="pop" data-stagger-step="80">
+
+                    <!-- Pet hosting -->
+                    <div data-tilt
+                        class="bg-white rounded-3xl p-8 shadow-sm hover-glow border border-slate-100 group">
+                        <div
+                            class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-6 transition-transform">
+                            <i class="bi bi-house-heart text-3xl text-orange-500 svc-icon"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Pet hosting</h3>
+                        <p class="text-slate-600 leading-relaxed">Your pet will stay over at the sitter’s home,
+                            enjoying a cozy home environment.</p>
+                    </div>
+
+                    <!-- Pet sitting -->
+                    <div data-tilt
+                        class="bg-white rounded-3xl p-8 shadow-sm hover-glow border border-slate-100 group">
+                        <div
+                            class="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                            <i class="bi bi-moon-stars text-3xl text-orange-500 svc-icon"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Pet sitting</h3>
+                        <p class="text-slate-600 leading-relaxed">A sitter will stay overnight at your home, keeping
+                            your pet in their comfort zone.</p>
+                    </div>
+
+                    <!-- Pet daycare -->
+                    <div data-tilt
+                        class="bg-white rounded-3xl p-8 shadow-sm hover-glow border border-slate-100 group">
+                        <div
+                            class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-6 transition-transform">
+                            <i class="bi bi-brightness-high text-3xl text-orange-500 svc-icon"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Pet daycare</h3>
+                        <p class="text-slate-600 leading-relaxed">Pet care during working hours with plenty of
+                            socialisation and play.</p>
+                    </div>
+
+                    <!-- House visits -->
+                    <div data-tilt
+                        class="bg-white rounded-3xl p-8 shadow-sm hover-glow border border-slate-100 group">
+                        <div
+                            class="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                            <i class="bi bi-geo-alt text-3xl text-orange-500 svc-icon"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">House visits</h3>
+                        <p class="text-slate-600 leading-relaxed">Schedule a drop-in to check on your pet, provide
+                            food, or just some company.</p>
+                    </div>
+
+                    <!-- Dog walks -->
+                    <div data-tilt
+                        class="bg-white rounded-3xl p-8 shadow-sm hover-glow border border-slate-100 group">
+                        <div
+                            class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-6 transition-transform">
+                            <i class="bi bi-compass text-3xl text-orange-500 svc-icon"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Dog walks</h3>
+                        <p class="text-slate-600 leading-relaxed">Organise someone to exercise your dog with energetic
+                            coastal walks.</p>
+                    </div>
+
+                    <!-- Dog grooming -->
+                    <div data-tilt
+                        class="bg-white rounded-3xl p-8 shadow-sm hover-glow border border-slate-100 group">
+                        <div
+                            class="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform">
+                            <i class="bi bi-scissors text-3xl text-orange-500 svc-icon"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Dog grooming</h3>
+                        <p class="text-slate-600 leading-relaxed">Have someone groom your dog to keep them looking and
+                            feeling their best.</p>
+                    </div>
+
+                    <!-- Dog training -->
+                    <div data-tilt
+                        class="bg-white rounded-3xl p-8 shadow-sm hover-glow border border-slate-100 group">
+                        <div
+                            class="w-16 h-16 bg-orange-50 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 group-hover:-rotate-6 transition-transform">
+                            <i class="bi bi-award text-3xl text-orange-500 svc-icon"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-3">Dog training</h3>
+                        <p class="text-slate-600 leading-relaxed">Get support on training and behaviour from
+                            experienced professionals.</p>
+                    </div>
+
+                    <!-- Booking card fills the 8th slot -->
+                    <a href="#contact" data-tilt data-boop
+                        class="rounded-3xl p-8 bg-orange-500 text-white flex flex-col justify-between group shadow-lg shadow-orange-200">
+                        <svg class="w-12 h-12 text-orange-200 group-hover:rotate-12 transition-transform">
+                            <use href="#paw" />
+                        </svg>
+                        <div>
+                            <h3 class="font-bold text-2xl mb-2">Not sure what fits?</h3>
+                            <p class="text-orange-50 mb-4">Tell George about your dog and he'll suggest a plan.</p>
+                            <span class="inline-flex items-center gap-2 font-bold">Start a chat <i
+                                    class="bi bi-chat-heart group-hover:translate-x-1 transition-transform"></i></span>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             PRODUCTS
+             ============================================================ -->
+        <section id="products" class="py-24 bg-white">
+            <div class="max-w-6xl mx-auto p-6">
+
+                <div class="text-center mb-16">
+                    <h2 data-split class="text-4xl md:text-5xl font-extrabold mb-4">Shop Pawfection</h2>
+                    <p data-reveal="up" class="text-slate-600 max-w-2xl mx-auto text-lg">Premium treats, toys, and grooming
+                        essentials for your furry friends.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8" data-stagger="up" data-stagger-step="120">
+
+                    <div data-tilt="5"
+                        class="rounded-[2rem] bg-white shadow-sm hover-glow border border-slate-100 overflow-hidden group">
+                        <div class="h-64 bg-gradient-to-br from-orange-50 to-amber-100 relative overflow-hidden grid place-items-center">
+                            <i
+                                class="bi bi-box-seam text-7xl text-orange-400 group-hover:scale-125 group-hover:-rotate-12 transition-transform duration-500"></i>
+                        </div>
+                        <div class="p-8">
+                            <span class="text-sm font-bold text-orange-500 mb-2 block">Natural</span>
+                            <h3 class="font-bold text-xl mb-2">Natural treat packs</h3>
+                            <p class="text-slate-600 mb-6">Organic, grain-free snacks made in Perth.</p>
+                            <a href="#contact" data-boop
+                                class="block text-center w-full py-3 rounded-xl border-2 border-orange-500 text-orange-500 font-bold hover:bg-orange-500 hover:text-white transition-colors">
+                                Ask about treats
+                            </a>
+                        </div>
+                    </div>
+
+                    <div data-tilt="5"
+                        class="rounded-[2rem] bg-white shadow-sm hover-glow border border-slate-100 overflow-hidden group">
+                        <div class="h-64 bg-gradient-to-br from-amber-50 to-orange-100 relative overflow-hidden grid place-items-center">
+                            <i
+                                class="bi bi-puzzle text-7xl text-orange-400 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-500"></i>
+                        </div>
+                        <div class="p-8">
+                            <span class="text-sm font-bold text-orange-500 mb-2 block">Play</span>
+                            <h3 class="font-bold text-xl mb-2">Enrichment toys</h3>
+                            <p class="text-slate-600 mb-6">Keep their minds busy with puzzle toys.</p>
+                            <a href="#contact" data-boop
+                                class="block text-center w-full py-3 rounded-xl border-2 border-orange-500 text-orange-500 font-bold hover:bg-orange-500 hover:text-white transition-colors">
+                                Ask about toys
+                            </a>
+                        </div>
+                    </div>
+
+                    <div data-tilt="5"
+                        class="rounded-[2rem] bg-white shadow-sm hover-glow border border-slate-100 overflow-hidden group">
+                        <div class="h-64 bg-gradient-to-br from-orange-50 to-amber-100 relative overflow-hidden grid place-items-center">
+                            <i
+                                class="bi bi-brush text-7xl text-orange-400 group-hover:scale-125 group-hover:-rotate-12 transition-transform duration-500"></i>
+                        </div>
+                        <div class="p-8">
+                            <span class="text-sm font-bold text-orange-500 mb-2 block">Care</span>
+                            <h3 class="font-bold text-xl mb-2">Grooming kits</h3>
+                            <p class="text-slate-600 mb-6">Professional tools for home maintenance.</p>
+                            <a href="#contact" data-boop
+                                class="block text-center w-full py-3 rounded-xl border-2 border-orange-500 text-orange-500 font-bold hover:bg-orange-500 hover:text-white transition-colors">
+                                Ask about kits
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             ABOUT — photo collage drifts at three scroll speeds.
+             ============================================================ -->
+        <section id="about" class="py-28 overflow-hidden">
+            <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+
+                <div class="relative h-[460px]" aria-hidden="false">
+                    <img src="images/pawfection-hero00002.webp" width="1400" height="928" loading="lazy"
+                        alt="George walking a beagle on a lead past a white wall" data-parallax="0.06"
+                        class="absolute left-0 top-0 w-[70%] h-64 object-cover rounded-3xl shadow-xl -rotate-3">
+                    <img src="images/pawfection_hero_dog.webp" width="640" height="640" loading="lazy"
+                        alt="Golden retriever sitting in a coastal Fremantle garden" data-parallax="-0.08"
+                        class="absolute right-0 top-20 w-[46%] h-72 object-cover rounded-3xl shadow-xl rotate-3 border-8 border-white">
+                    <img src="images/pawfection-hero00003.webp" width="1400" height="929" loading="lazy"
+                        alt="A beagle waiting patiently on a timber deck" data-parallax="0.14"
+                        class="absolute left-[12%] bottom-0 w-[58%] h-48 object-cover rounded-3xl shadow-xl rotate-2 border-8 border-amber-50">
+                </div>
+
+                <div>
+                    <h2 data-split class="text-4xl md:text-5xl font-extrabold mb-6">Meet George</h2>
+                    <p data-reveal="up" class="text-lg text-slate-600 leading-relaxed mb-6">
+                        After retiring in Claremont, George Andrew built Pawfection to offer calm, trustworthy dog care
+                        rooted in routine, patience and genuine connection.
+                    </p>
+                    <div data-reveal="tilt"
+                        class="relative bg-white rounded-3xl p-8 shadow-sm border-l-4 border-orange-500">
+                        <p class="font-display font-bold text-xl text-slate-800 leading-snug mb-2">Routine, patience,
+                            connection</p>
+                        <p class="text-slate-600">Every visit follows your dog's own routine, so they stay settled
+                            while you're away.</p>
+                    </div>
+                    <ul class="mt-8 grid grid-cols-2 gap-4" data-stagger="pop">
+                        <li class="flex items-center gap-3 font-semibold"><i
+                                class="bi bi-shield-check text-2xl text-orange-500"></i>PawPing affiliate</li>
+                        <li class="flex items-center gap-3 font-semibold"><i
+                                class="bi bi-geo-alt text-2xl text-orange-500"></i>Fremantle &amp; surrounds</li>
+                        <li class="flex items-center gap-3 font-semibold"><i
+                                class="bi bi-clock-history text-2xl text-orange-500"></i>Routine-first care</li>
+                        <li class="flex items-center gap-3 font-semibold"><i
+                                class="bi bi-heart text-2xl text-orange-500"></i>Calm, patient handling</li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================================
+             CONTACT
+             ============================================================ -->
+        <section id="contact" class="py-28 bg-orange-600 text-white overflow-hidden relative">
+            <div class="absolute -top-16 -right-16 opacity-10 pointer-events-none">
+                <svg class="w-[340px] h-[340px] spin-slow">
+                    <use href="#paw" />
+                </svg>
+            </div>
+            <div class="absolute -bottom-20 -left-10 opacity-10 pointer-events-none" data-parallax="0.2">
+                <svg class="w-[220px] h-[220px] -rotate-12">
+                    <use href="#paw" />
+                </svg>
+            </div>
+            <div class="max-w-3xl mx-auto text-center p-6 relative z-10">
+                <h2 data-split class="text-4xl md:text-5xl font-extrabold mb-6">Ready to give your dog the care they
+                    deserve?</h2>
+                <p data-reveal="up" class="text-xl text-orange-100 mb-10">Contact George today to discuss your
+                    dog's needs and schedule a meet-and-greet.</p>
+                <div class="flex flex-wrap justify-center gap-4" data-reveal="pop" style="--pp-delay:.2s">
+                    <a href="mailto:george@pawfection.au?subject=Meet-and-greet%20for%20my%20dog" data-magnetic
+                        data-boop="#ffffff,#fed7aa,#7c2d12"
+                        class="bg-white text-orange-600 px-10 py-5 rounded-2xl shadow-xl font-extrabold text-lg hover:bg-orange-50 inline-flex items-center gap-3">
+                        <i class="bi bi-envelope-heart"></i> Email George
+                    </a>
+                    <a href="tel:0400000000" data-magnetic
+                        class="border-2 border-white/40 text-white px-10 py-5 rounded-2xl font-extrabold text-lg hover:bg-white/10 inline-flex items-center gap-3">
+                        <i class="bi bi-telephone"></i> 0400 000 000
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-16">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-12">
+            <div class="md:col-span-2">
+                <p class="text-3xl font-bold text-white flex items-center gap-2 mb-6 font-display">
+                    <svg class="w-8 h-8 text-orange-500">
+                        <use href="#paw" />
+                    </svg>
+                    Pawfection
+                </p>
+                <p class="max-w-sm mb-8 leading-relaxed">
+                    Premium, heart-centred dog services in Fremantle and surrounds. Trust in routine, patience, and
+                    genuine connection.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" aria-label="Facebook"
+                        class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-500 hover:text-white hover:-translate-y-1 transition-all"><i
+                            class="bi bi-facebook"></i></a>
+                    <a href="#" aria-label="Instagram"
+                        class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-500 hover:text-white hover:-translate-y-1 transition-all"><i
+                            class="bi bi-instagram"></i></a>
+                    <a href="#" aria-label="WhatsApp"
+                        class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-500 hover:text-white hover:-translate-y-1 transition-all"><i
+                            class="bi bi-whatsapp"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-white font-bold mb-6">Quick links</h3>
+                <ul class="space-y-4">
+                    <li><a href="#services" class="hover:text-orange-500 transition-colors">Our services</a></li>
+                    <li><a href="#products" class="hover:text-orange-500 transition-colors">Shop products</a></li>
+                    <li><a href="#about" class="hover:text-orange-500 transition-colors">Meet George</a></li>
+                    <li><a href="https://perth-paw-ping.vercel.app" class="hover:text-orange-500 transition-colors">PawPing smart tags</a></li>
+                    <li><a href="https://perth-paw-ping.vercel.app/styleguide" class="hover:text-orange-500 transition-colors">Brand kit</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-white font-bold mb-6">Contact info</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-center gap-3"><i class="bi bi-geo-alt text-orange-500"></i> Fremantle, WA
+                        6160</li>
+                    <li><a href="tel:0400000000" class="flex items-center gap-3 hover:text-orange-500"><i
+                                class="bi bi-telephone text-orange-500"></i> 0400 000 000</a></li>
+                    <li><a href="mailto:george@pawfection.au" class="flex items-center gap-3 hover:text-orange-500"><i
+                                class="bi bi-envelope text-orange-500"></i> george@pawfection.au</a></li>
+                </ul>
+            </div>
+        </div>
+        <div
+            class="max-w-6xl mx-auto px-6 pt-16 mt-16 border-t border-slate-800 flex flex-col md:flex-row justify-between gap-4 text-sm">
+            <p>&copy; 2026 Pawfection Dog Services. All rights reserved.</p>
+            <p>Made with <i class="bi bi-heart-fill text-red-500 mx-1"></i> in Fremantle</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu: animated open/close, closes after choosing a link
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        function setMenu(open) {
+            mobileMenu.classList.toggle('open', open);
+            menuBtn.setAttribute('aria-expanded', String(open));
+            menuBtn.querySelector('i').className = open ? 'bi bi-x-lg text-2xl' : 'bi bi-list text-2xl';
+        }
+
+        menuBtn.addEventListener('click', () => setMenu(!mobileMenu.classList.contains('open')));
+        mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+    </script>
+
+</body>
+
+</html>
